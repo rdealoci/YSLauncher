@@ -1,4 +1,4 @@
-# YSLauncher
+# YSLauncher 
 
 A fast, lightweight cross-platform launcher and version manager for Yandere Simulator on Windows, Linux, and macOS.
 
