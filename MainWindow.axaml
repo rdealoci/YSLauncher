@@ -1,0 +1,1422 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        
+        x:Class="YSLauncher.MainWindow"
+        Title="YSLauncher"
+        Width="391" Height="690"
+        CanResize="False"
+        WindowStartupLocation="CenterScreen"
+        WindowDecorations="None"
+        Icon="/Assets/icon.ico"
+        FontFamily="avares://YSLauncher/Assets/Fonts#League Gothic"> 
+
+    <Window.Background>
+        <ImageBrush Source="avares://YSLauncher/Assets/bg.jpg" Stretch="UniformToFill"/>
+    </Window.Background>
+
+    <Window.Styles>
+        <Style Selector="TextBox:focus /template/ Border#PART_BorderElement">
+            <Setter Property="Background" Value="#E4DCD8"/>
+            <Setter Property="BorderBrush" Value="#A3857B"/>
+            <Setter Property="BorderThickness" Value="2"/>
+        </Style>
+        <Style Selector="TextBox:pointerover /template/ Border#PART_BorderElement">
+            <Setter Property="Background" Value="#E4DCD8"/>
+            <Setter Property="BorderBrush" Value="#8A6E65"/>
+        </Style>
+        <Style Selector="TextBox:focus">
+            <Setter Property="Foreground" Value="#3D3330"/>
+        </Style>
+        <Style Selector="Button#CloseOnLaunchButton:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
+        <Style Selector="Button#PlayButton.playing">
+            <Setter Property="Background" Value="#E53935"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+        <Style Selector="Button#PlayButton.playing /template/ ContentPresenter">
+            <Setter Property="Background" Value="#E53935"/>
+            <Setter Property="TextBlock.Foreground" Value="White"/>
+        </Style>
+        <Style Selector="Button#PlayButton.playing /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#E53935"/>
+            <Setter Property="TextBlock.Foreground" Value="White"/>
+        </Style>
+        <Style Selector="Button#PlayButton.playing:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#D32F2F"/>
+            <Setter Property="TextBlock.Foreground" Value="White"/>
+        </Style>
+        <Style Selector="Button#PlayButton.playing:pressed /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#C62828"/>
+            <Setter Property="TextBlock.Foreground" Value="White"/>
+        </Style>
+        <Style Selector="Button#PlayButton.stopping">
+            <Setter Property="Background" Value="#B71C1C"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Cursor" Value="Wait"/>
+        </Style>
+        <Style Selector="Button#PlayButton.stopping /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#B71C1C"/>
+            <Setter Property="TextBlock.Foreground" Value="White"/>
+        </Style>
+        <Style Selector="Button#PlayButton.posemod">
+            <Setter Property="Background" Value="#E53935"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+        <Style Selector="Button#PlayButton.posemod /template/ ContentPresenter">
+            <Setter Property="Background" Value="#E53935"/>
+            <Setter Property="TextBlock.Foreground" Value="White"/>
+        </Style>
+        <Style Selector="Button#PlayButton.posemod /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#E53935"/>
+            <Setter Property="TextBlock.Foreground" Value="White"/>
+        </Style>
+        <Style Selector="Button#PlayButton.posemod:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#D32F2F"/>
+            <Setter Property="TextBlock.Foreground" Value="White"/>
+        </Style>
+        <Style Selector="Button#PlayButton.posemod:pressed /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#C62828"/>
+            <Setter Property="TextBlock.Foreground" Value="White"/>
+        </Style>
+        <Style Selector="Button#PlayButton.posemod-missing">
+            <Setter Property="Background" Value="#7E0316"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+        <Style Selector="Button#PlayButton.posemod-missing /template/ ContentPresenter">
+            <Setter Property="Background" Value="#7E0316"/>
+            <Setter Property="TextBlock.Foreground" Value="White"/>
+        </Style>
+        <Style Selector="Button#PlayButton.posemod-missing /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#7E0316"/>
+            <Setter Property="TextBlock.Foreground" Value="White"/>
+        </Style>
+        <Style Selector="Button#PlayButton.posemod-missing:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#660211"/>
+            <Setter Property="TextBlock.Foreground" Value="White"/>
+        </Style>
+        <Style Selector="Button#PlayButton.posemod-missing:pressed /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#52010E"/>
+            <Setter Property="TextBlock.Foreground" Value="White"/>
+        </Style>
+        <Style Selector="Button.playing /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#E53935"/>
+            <Setter Property="TextBlock.Foreground" Value="White"/>
+        </Style>
+        <Style Selector="Button.playing:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#D32F2F"/>
+            <Setter Property="TextBlock.Foreground" Value="White"/>
+        </Style>
+        <Style Selector="Button.playing:pressed /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#C62828"/>
+            <Setter Property="TextBlock.Foreground" Value="White"/>
+        </Style>
+
+        <Style Selector="Button.GreenOkBtn">
+            <Setter Property="Background" Value="#4CAF50"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+        <Style Selector="Button.GreenOkBtn /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#4CAF50"/>
+            <Setter Property="TextBlock.Foreground" Value="White"/>
+            <Setter Property="CornerRadius" Value="8"/>
+        </Style>
+        <Style Selector="Button.GreenOkBtn:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#66BB6A"/>
+            <Setter Property="TextBlock.Foreground" Value="White"/>
+        </Style>
+        <Style Selector="Button.GreenOkBtn:pressed /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#388E3C"/>
+            <Setter Property="TextBlock.Foreground" Value="White"/>
+        </Style>
+
+        <Style Selector="Button.PromptYesBtn /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#FF3B7C"/>
+            <Setter Property="TextBlock.Foreground" Value="White"/>
+            <Setter Property="CornerRadius" Value="10"/>
+        </Style>
+        <Style Selector="Button.PromptYesBtn:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#FF548E"/>
+            <Setter Property="TextBlock.Foreground" Value="White"/>
+        </Style>
+        <Style Selector="Button.PromptYesBtn:pressed /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#E02867"/>
+            <Setter Property="TextBlock.Foreground" Value="White"/>
+        </Style>
+
+        <Style Selector="Button.PromptNoBtn /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#2A202D"/>
+            <Setter Property="BorderBrush" Value="#E88CA6"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="TextBlock.Foreground" Value="#FFA6C2"/>
+            <Setter Property="CornerRadius" Value="10"/>
+        </Style>
+        <Style Selector="Button.PromptNoBtn:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#3E2E43"/>
+            <Setter Property="BorderBrush" Value="#FF548E"/>
+            <Setter Property="TextBlock.Foreground" Value="White"/>
+        </Style>
+        <Style Selector="Button.PromptNoBtn:pressed /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#1E1621"/>
+            <Setter Property="BorderBrush" Value="#E88CA6"/>
+            <Setter Property="TextBlock.Foreground" Value="#FFA6C2"/>
+        </Style>
+
+        <!-- Modal Dialog Button Styles -->
+        <Style Selector="Button.ModalPrimaryBtn">
+            <Setter Property="Background" Value="#FF3B7C"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="CornerRadius" Value="8"/>
+        </Style>
+        <Style Selector="Button.ModalPrimaryBtn /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#FF3B7C"/>
+            <Setter Property="TextBlock.Foreground" Value="White"/>
+            <Setter Property="CornerRadius" Value="8"/>
+        </Style>
+        <Style Selector="Button.ModalPrimaryBtn:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#FF548E"/>
+            <Setter Property="TextBlock.Foreground" Value="White"/>
+        </Style>
+        <Style Selector="Button.ModalPrimaryBtn:pressed /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#E02867"/>
+            <Setter Property="TextBlock.Foreground" Value="White"/>
+        </Style>
+
+        <Style Selector="Button.ModalDangerBtn">
+            <Setter Property="Background" Value="#E53935"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="CornerRadius" Value="8"/>
+        </Style>
+        <Style Selector="Button.ModalDangerBtn /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#E53935"/>
+            <Setter Property="TextBlock.Foreground" Value="White"/>
+            <Setter Property="CornerRadius" Value="8"/>
+        </Style>
+        <Style Selector="Button.ModalDangerBtn:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#EF5350"/>
+            <Setter Property="TextBlock.Foreground" Value="White"/>
+        </Style>
+        <Style Selector="Button.ModalDangerBtn:pressed /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#C62828"/>
+            <Setter Property="TextBlock.Foreground" Value="White"/>
+        </Style>
+
+        <Style Selector="Button.ModalSecondaryBtn">
+            <Setter Property="Background" Value="#D3CBC8"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="CornerRadius" Value="8"/>
+        </Style>
+        <Style Selector="Button.ModalSecondaryBtn /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#D3CBC8"/>
+            <Setter Property="TextBlock.Foreground" Value="White"/>
+            <Setter Property="CornerRadius" Value="8"/>
+        </Style>
+        <Style Selector="Button.ModalSecondaryBtn:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#BDB4B0"/>
+            <Setter Property="TextBlock.Foreground" Value="White"/>
+        </Style>
+        <Style Selector="Button.ModalSecondaryBtn:pressed /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#A89E9A"/>
+            <Setter Property="TextBlock.Foreground" Value="White"/>
+        </Style>
+
+        <Style Selector="Button.ModalCancelBtn">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#8C8886"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="CornerRadius" Value="6"/>
+        </Style>
+        <Style Selector="Button.ModalCancelBtn /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="TextBlock.Foreground" Value="#8C8886"/>
+            <Setter Property="CornerRadius" Value="6"/>
+        </Style>
+        <Style Selector="Button.ModalCancelBtn:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#15000000"/>
+            <Setter Property="TextBlock.Foreground" Value="#504845"/>
+        </Style>
+        <Style Selector="Button.ModalCancelBtn:pressed /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#25000000"/>
+            <Setter Property="TextBlock.Foreground" Value="#302825"/>
+        </Style>
+
+        <Style Selector="Button.FlagTile">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="RenderTransform" Value="scale(1)"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.15"/>
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="Button.FlagTile:pointerover">
+            <Setter Property="RenderTransform" Value="scale(1.08)"/>
+        </Style>
+        <Style Selector="Button.FlagTile:pressed">
+            <Setter Property="RenderTransform" Value="scale(0.95)"/>
+        </Style>
+        <Style Selector="Button.FlagTile /template/ ContentPresenter">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+        <Style Selector="Button.FlagTile:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+
+        <Style Selector="Button.HeaderBtn">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="7,6"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="CornerRadius" Value="4"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Background" Duration="0:0:0.12"/>
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="Button.HeaderBtn /template/ ContentPresenter">
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
+        <Style Selector="Button.HeaderBtn:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="#33FFFFFF"/>
+        </Style>
+        <Style Selector="Button.HeaderBtn:pointerover">
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+        <Style Selector="Button.HeaderBtn:pressed /template/ ContentPresenter">
+            <Setter Property="Background" Value="#55FFFFFF"/>
+        </Style>
+
+        <Style Selector="Button.HeaderCloseBtn">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="7,6"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="CornerRadius" Value="4"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Background" Duration="0:0:0.12"/>
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="Button.HeaderCloseBtn /template/ ContentPresenter">
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
+        <Style Selector="Button.HeaderCloseBtn:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="#E53935"/>
+        </Style>
+        <Style Selector="Button.HeaderCloseBtn:pointerover">
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+        <Style Selector="Button.HeaderCloseBtn:pressed /template/ ContentPresenter">
+            <Setter Property="Background" Value="#C62828"/>
+        </Style>
+        <Style Selector="Border#CustomModeStatusContainer:pointerover">
+            <Setter Property="Background" Value="#15000000"/>
+        </Style>
+
+        <Style Selector="ToolTip">
+            <Setter Property="IsHitTestVisible" Value="False"/>
+        </Style>
+
+        <Style Selector="MenuFlyoutPresenter">
+            <Setter Property="Background" Value="#FFFBF8F6"/>
+            <Setter Property="BorderBrush" Value="#E88CA6"/>
+            <Setter Property="BorderThickness" Value="1.5"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Padding" Value="4"/>
+            <Setter Property="MinWidth" Value="250"/>
+        </Style>
+        <Style Selector="MenuItem">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="#504845"/>
+            <Setter Property="CornerRadius" Value="6"/>
+            <Setter Property="Padding" Value="8,8"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+        <Style Selector="MenuItem:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="#1AE88CA6"/>
+        </Style>
+        <Style Selector="MenuItem:pointerover">
+            <Setter Property="Foreground" Value="#E88CA6"/>
+        </Style>
+
+        <Style Selector="Button#LatestPostButton, Button#AutoUpdateButton">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#706865"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="CornerRadius" Value="14"/>
+            <Setter Property="RenderTransformOrigin" Value="50%,50%"/>
+            <Setter Property="RenderTransform" Value="scale(1)"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Background" Duration="0:0:0.12"/>
+                    <BrushTransition Property="Foreground" Duration="0:0:0.12"/>
+                    <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.12"/>
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="Button#LatestPostButton /template/ ContentPresenter, Button#AutoUpdateButton /template/ ContentPresenter">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="CornerRadius" Value="14"/>
+        </Style>
+        <Style Selector="Button#LatestPostButton:pointerover /template/ ContentPresenter, Button#AutoUpdateButton:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="#15000000"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+        <Style Selector="Button#LatestPostButton:pointerover, Button#AutoUpdateButton:pointerover">
+            <Setter Property="Foreground" Value="#E88CA6"/>
+            <Setter Property="RenderTransform" Value="scale(1.1)"/>
+        </Style>
+        <Style Selector="Button#AutoUpdateButton.active">
+            <Setter Property="Foreground" Value="#E88CA6"/>
+        </Style>
+        <Style Selector="Button#LatestPostButton:pressed /template/ ContentPresenter, Button#AutoUpdateButton:pressed /template/ ContentPresenter">
+            <Setter Property="Background" Value="#30000000"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+        <Style Selector="Button#LatestPostButton:pressed, Button#AutoUpdateButton:pressed">
+            <Setter Property="RenderTransform" Value="scale(0.95)"/>
+        </Style>
+    </Window.Styles>
+
+    <Grid>
+        <Grid x:Name="MainScreen" IsVisible="True">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/> 
+            <RowDefinition Height="*"/>    
+            <RowDefinition Height="Auto"/> 
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0">
+        <Border Background="#E88CA6" Padding="5" 
+                PointerPressed="Header_PointerPressed">
+            <Grid>
+                <Image x:Name="LauncherLogo" 
+                       Source="avares://YSLauncher/Assets/logo.png" 
+                       Height="60" 
+                       Margin="0,15,0,15" 
+                       HorizontalAlignment="Center" 
+                       VerticalAlignment="Center" 
+                       RenderOptions.BitmapInterpolationMode="HighQuality" 
+                       RenderTransformOrigin="50%,50%"/>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="6,6,0,0" Spacing="2">
+                    <Button x:Name="YouTubeButton" 
+                            Classes="HeaderBtn"
+                            VerticalAlignment="Top"
+                            ToolTip.Tip="YouTube">
+                        <Button.Flyout>
+                            <MenuFlyout Placement="BottomEdgeAlignedLeft">
+                                <MenuItem x:Name="YouTubePrimaryItem" 
+                                          Header="Canal Primário (@YandereDev)" 
+                                          Click="YouTubePrimary_Click">
+                                    <MenuItem.Icon>
+                                        <PathIcon Data="M21.58 7.19c-.23-.86-.91-1.54-1.77-1.77C18.25 5 12 5 12 5s-6.25 0-7.81.42c-.86.23-1.54.91-1.77 1.77C2 8.75 2 12 2 12s0 3.25.42 4.81c.23.86.91 1.54 1.77 1.77C5.75 19 12 19 12 19s6.25 0 7.81-.42c.86-.23 1.54-.91 1.77-1.77C22 15.25 22 12 22 12s0-3.25-.42-4.81zM10 15V9l5.2 3-5.2 3z"
+                                                  Width="15" Height="15" 
+                                                  Foreground="#E53935"/>
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                                <MenuItem x:Name="YouTubeSecondaryItem" 
+                                          Header="Canal Secundário (@YandereArchive)" 
+                                          Click="YouTubeSecondary_Click">
+                                    <MenuItem.Icon>
+                                        <PathIcon Data="M21.58 7.19c-.23-.86-.91-1.54-1.77-1.77C18.25 5 12 5 12 5s-6.25 0-7.81.42c-.86.23-1.54.91-1.77 1.77C2 8.75 2 12 2 12s0 3.25.42 4.81c.23.86.91 1.54 1.77 1.77C5.75 19 12 19 12 19s6.25 0 7.81-.42c.86-.23 1.54-.91 1.77-1.77C22 15.25 22 12 22 12s0-3.25-.42-4.81zM10 15V9l5.2 3-5.2 3z"
+                                                  Width="15" Height="15" 
+                                                  Foreground="#E53935"/>
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                            </MenuFlyout>
+                        </Button.Flyout>
+                        <PathIcon Data="M21.58 7.19c-.23-.86-.91-1.54-1.77-1.77C18.25 5 12 5 12 5s-6.25 0-7.81.42c-.86.23-1.54.91-1.77 1.77C2 8.75 2 12 2 12s0 3.25.42 4.81c.23.86.91 1.54 1.77 1.77C5.75 19 12 19 12 19s6.25 0 7.81-.42c.86-.23 1.54-.91 1.77-1.77C22 15.25 22 12 22 12s0-3.25-.42-4.81zM10 15V9l5.2 3-5.2 3z" 
+                                  Width="21" Height="21" 
+                                  Foreground="White" />
+                    </Button>
+                    <Button x:Name="DiscordButton" 
+                            Classes="HeaderBtn"
+                            VerticalAlignment="Top"
+                            ToolTip.Tip="Discord"
+                            Click="DiscordButton_Click">
+                        <PathIcon Data="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z" 
+                                  Width="18" Height="18" 
+                                  Foreground="White" />
+                    </Button>
+                    <Button x:Name="KickButton" 
+                            Classes="HeaderBtn"
+                            VerticalAlignment="Top"
+                            ToolTip.Tip="Kick"
+                            Click="KickButton_Click">
+                        <PathIcon Data="M1.333 0h8v5.333H12V2.667h2.667V0h8v8H20v2.667h-2.667v2.666H20V16h2.667v8h-8v-2.667H12v-2.666H9.333V24h-8Z" 
+                                  Width="16" Height="16" 
+                                  Foreground="White" />
+                    </Button>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,6,6,0" Spacing="2">
+                    <Button x:Name="TutorialHelpButton" 
+                            Classes="HeaderBtn"
+                            VerticalAlignment="Top"
+                            ToolTip.Tip="Tutorial"
+                            Click="TutorialHelpButton_Click">
+                        <PathIcon Data="M11 18h2v-2h-2v2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4z" 
+                                  Width="17" Height="17" 
+                                  Foreground="White" />
+                    </Button>
+                    <Button x:Name="MinimizeButton" 
+                            Classes="HeaderBtn"
+                            VerticalAlignment="Top"
+                            Click="MinimizeButton_Click">
+                        <PathIcon Data="M19 13H5v-2h14v2z" Width="17" Height="17" Foreground="White" />
+                    </Button>
+                    <Button x:Name="CloseButton"
+                            Classes="HeaderCloseBtn"
+                            VerticalAlignment="Top"
+                            Click="CloseButton_Click">
+                        <PathIcon Data="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" Width="17" Height="17" Foreground="White"/>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Border>
+        
+        <Border x:Name="StatusBorder" Background="#A3857B" Padding="8,4">
+            <TextBlock x:Name="StatusText" 
+                       Text="Versão não instalada. Clique em Baixar para instalar." 
+                       FontSize="20"
+                       Foreground="White" 
+                       HorizontalAlignment="Center" 
+                       TextWrapping="Wrap" 
+                       TextAlignment="Center"/>
+        </Border>
+    </StackPanel>
+
+    <Border Grid.Row="1" Margin="23">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="15">
+                
+                <TextBlock x:Name="InstallPathLabel"
+                           Text="Caminho de Instalação:" 
+                           FontSize="26" 
+                           FontWeight="Black" 
+                           Foreground="#3D3330"
+                           HorizontalAlignment="Center"/>
+                
+                <StackPanel Orientation="Horizontal" Spacing="8" HorizontalAlignment="Center">
+                    <TextBox x:Name="PathTextBox" 
+                             Width="242" 
+                             Height="46"
+                             VerticalContentAlignment="Center"
+                             FontSize="23"
+                             Background="#E4DCD8"
+                             BorderBrush="#C4B8B4"
+                             BorderThickness="2"
+                             Foreground="#504845"
+                             CaretBrush="#504845"
+                             TextChanged="PathTextBox_TextChanged"
+                             LostFocus="PathTextBox_LostFocus"
+                             KeyDown="PathTextBox_KeyDown"/>
+                             
+                    <Button x:Name="BrowseButton" 
+                            Content="..." 
+                            FontSize="20"
+                            Width="52" 
+                            Height="46"
+                            Background="#A3857B"
+                            BorderBrush="#8A6E65"
+                            BorderThickness="1"
+                            Foreground="White"
+                            VerticalContentAlignment="Center"
+                            HorizontalContentAlignment="Center"
+                            Click="BrowseButton_Click"/>
+                </StackPanel>
+
+                <TextBlock x:Name="ExecutablePathText"
+                           Text="" 
+                           FontSize="18" 
+                           Foreground="#7A6F6B"
+                           HorizontalAlignment="Center"
+                           TextAlignment="Center"
+                           TextWrapping="Wrap"
+                           MaxWidth="340"/>
+
+
+                <Separator Margin="0,15,0,15" Background="Transparent" Height="8"/>
+
+                
+                
+                <ProgressBar x:Name="DownloadProgressBar" 
+                             Width="322" 
+                             Height="18" 
+                             Minimum="0" 
+                             Maximum="100" 
+                             Value="0" 
+                             IsVisible="False"
+                             Foreground="#4A88C9"/>
+            </StackPanel>
+        </Border>
+
+        <Border Grid.Row="2" Background="#AAEAE4E1" Padding="15">
+            <StackPanel Spacing="10">
+                <Grid x:Name="VersionSelectionContainer" ColumnDefinitions="*, Auto" IsVisible="True" Margin="0,0,0,0">
+                    <ComboBox x:Name="VersionComboBox" 
+                              HorizontalAlignment="Stretch" 
+                              SelectedIndex="0"
+                              Height="46"
+                              Background="Transparent"
+                              BorderThickness="0"
+                              Foreground="#8C8886"
+                              
+                              FontSize="24"
+                              VerticalAlignment="Center"
+                              SelectionChanged="VersionComboBox_SelectionChanged">
+                        <ComboBoxItem Tag="Latest">Última Versão</ComboBoxItem>
+                    </ComboBox>
+                    <Button x:Name="DeleteButton" 
+                            Grid.Column="1" 
+                            Margin="12,0,0,0" 
+                            Width="42" 
+                            Height="42" 
+                            Background="#D3CBC8"
+                            BorderThickness="0"
+                            CornerRadius="6"
+                            Click="DeleteButton_Click">
+                        <PathIcon Data="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z" Foreground="White" Width="21" Height="21"/>
+                    </Button>
+                </Grid>
+
+                <TextBlock x:Name="OldVersionNotice" 
+                           Text="Nota: O launcher fará o download para uma nova pasta dentro de 'vers'."
+                           Foreground="#8C8886" 
+                           FontSize="20" 
+                           FontStyle="Italic"
+                           TextWrapping="Wrap"
+                           IsVisible="False"
+                           Margin="0,0,0,6" />
+
+                <Grid x:Name="LinuxRunnerContainer" ColumnDefinitions="*, Auto" Margin="0,0,0,12" IsVisible="False">
+                    <ComboBox x:Name="LinuxRunnerComboBox" 
+                              HorizontalAlignment="Stretch"
+                              Height="46"
+                              Background="Transparent"
+                              BorderThickness="0"
+                              Foreground="#8C8886"
+                              
+                              FontSize="24"
+                              VerticalAlignment="Center">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{ReflectionBinding DisplayName}" />
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+
+                    <Button x:Name="OpenRunnersFolderButton" 
+                            Grid.Column="1" 
+                            Margin="12,0,0,0" 
+                            Width="42" 
+                            Height="42" 
+                            Background="#D3CBC8"
+                            BorderThickness="0"
+                            CornerRadius="6"
+                            Click="OpenRunnersFolderButton_Click">
+                        <PathIcon Data="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" Foreground="White" Width="21" Height="21"/>
+                    </Button>
+                </Grid>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="16"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button x:Name="PlayButton" 
+                            Grid.Column="0"
+                            HorizontalAlignment="Stretch"
+                            Height="64" 
+                            Background="#D3CBC8" 
+                            Foreground="#8C8886"
+                            Padding="8,4"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Click="PlayButton_Click">
+                        <Viewbox Stretch="Uniform" StretchDirection="DownOnly" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <StackPanel Orientation="Horizontal" Spacing="8" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <PathIcon x:Name="PlayIcon"
+                                          Data="M8 5v14l11-7z"
+                                          Width="20" Height="20"
+                                          Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"
+                                          VerticalAlignment="Center"/>
+                                <TextBlock x:Name="PlayText"
+                                           Text="JOGAR" 
+                                           FontSize="32" 
+                                           FontWeight="Black"
+                                           LetterSpacing="1"
+                                           VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Viewbox>
+                    </Button>
+                            
+                    <Button x:Name="UpdateButton" 
+                            Grid.Column="2"
+                            HorizontalAlignment="Stretch"
+                            Height="64" 
+                            Background="#4A88C9"
+                            Padding="8,4"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Click="UpdateButton_Click">
+                        <Viewbox Stretch="Uniform" StretchDirection="DownOnly" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <TextBlock x:Name="UpdateText"
+                                       Text="BAIXAR" 
+                                       Foreground="White" 
+                                       FontSize="28" 
+                                       FontWeight="Black"
+                                       LetterSpacing="1"
+                                       TextAlignment="Center"/>
+                        </Viewbox>
+                    </Button>
+                </Grid>
+
+                <Button x:Name="CloseOnLaunchButton"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        Padding="4,2"
+                        Margin="0,4,0,0"
+                        HorizontalAlignment="Center"
+                        Cursor="Hand"
+                        Click="CloseOnLaunchButton_Click">
+                    <Viewbox Stretch="Uniform" StretchDirection="DownOnly" HorizontalAlignment="Center" VerticalAlignment="Center" MaxWidth="340">
+                        <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                            <PathIcon x:Name="CloseOnLaunchHeart"
+                                      Width="18" Height="18"
+                                      Data="M16.5 3c-1.74 0-3.41.81-4.5 2.09C10.91 3.81 9.24 3 7.5 3 4.42 3 2 5.42 2 8.5c0 3.78 3.4 6.86 8.55 11.54L12 21.35l1.45-1.32C18.6 15.36 22 12.28 22 8.5 22 5.42 19.58 3 16.5 3zm-4.4 15.55l-.1.1-.1-.1C7.14 14.24 4 11.39 4 8.5 4 6.5 5.5 5 7.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5c2 0 3.5 1.5 3.5 3.5 0 2.89-3.14 5.74-7.9 10.05z"
+                                      Foreground="#8C8886"/>
+                            <TextBlock x:Name="CloseOnLaunchText"
+                                       Text="Fechar launcher ao abrir o jogo"
+                                       FontSize="20"
+                                       Foreground="#504845"
+                                       VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Viewbox>
+                </Button>
+
+
+                <Button x:Name="OrganizeFoldersButton"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        Padding="4,2"
+                        Margin="0,2,0,0"
+                        HorizontalAlignment="Center"
+                        Cursor="Hand"
+                        Click="OrganizeFoldersButton_Click">
+                    <Viewbox Stretch="Uniform" StretchDirection="DownOnly" HorizontalAlignment="Center" VerticalAlignment="Center" MaxWidth="340">
+                        <StackPanel Orientation="Horizontal" Spacing="6" VerticalAlignment="Center">
+                            <PathIcon Data="M20,18H4V8H20M20,6H12L10,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V8C22,6.89 21.1,6 20,6Z" Width="17" Height="17" Foreground="#8C8886"/>
+                            <TextBlock x:Name="OrganizeFoldersButtonText"
+                                       Text="Organizar Versões"
+                                       FontSize="19"
+                                       Foreground="#706865"
+                                       VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Viewbox>
+                </Button>
+
+            </StackPanel>
+        </Border>
+
+        <StackPanel Grid.Row="2"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Bottom"
+                    Margin="10,0,0,10"
+                    Spacing="4"
+                    ZIndex="50">
+            <Button x:Name="LatestPostButton"
+                    Width="28"
+                    Height="28"
+                    CornerRadius="14"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    Padding="0"
+                    Cursor="Hand"
+                    RenderTransformOrigin="50%,50%"
+                    ToolTip.Placement="Top"
+                    ToolTip.VerticalOffset="-8"
+                    ToolTip.ShowDelay="200"
+                    ToolTip.Tip="Ler último post"
+                    Click="LatestPostButton_Click">
+                <PathIcon x:Name="LatestPostIcon"
+                          Data="M20 5H4c-1.1 0-1.99.9-1.99 2L2 19c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm-5 14H5v-2h10v2zm0-4H5v-2h10v2zm0-4H5V9h10v2zm4 8h-2V9h2v10z"
+                          Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"
+                          Width="18"
+                          Height="18"
+                          HorizontalAlignment="Center"
+                          VerticalAlignment="Center"/>
+            </Button>
+
+            <Button x:Name="AutoUpdateButton"
+                    Width="28"
+                    Height="28"
+                    CornerRadius="14"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    Padding="0"
+                    Cursor="Hand"
+                    RenderTransformOrigin="50%,50%"
+                    ToolTip.Placement="Top"
+                    ToolTip.VerticalOffset="-8"
+                    ToolTip.ShowDelay="200"
+                    ToolTip.Tip="Notificar e atualizar automaticamente"
+                    Click="AutoUpdateButton_Click">
+                <PathIcon x:Name="AutoUpdateBell"
+                          Data="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2zm-2 1H8v-6c0-2.48 1.51-4.5 4-4.5s4 2.02 4 4.5v6z"
+                          Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"
+                          Width="18"
+                          Height="18"
+                          HorizontalAlignment="Center"
+                          VerticalAlignment="Center"/>
+            </Button>
+        </StackPanel>
+
+        <Border x:Name="CustomModeStatusContainer"
+                Grid.Row="2"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
+                Margin="0,0,10,10"
+                Width="28"
+                Height="28"
+                CornerRadius="14"
+                Background="Transparent"
+                Cursor="Hand"
+                ZIndex="50"
+                ToolTip.Placement="Top"
+                ToolTip.VerticalOffset="-8"
+                ToolTip.ShowDelay="200"
+                ToolTip.Tip="Custom Mode não salvo"
+                PointerPressed="CustomModeStatusContainer_PointerPressed">
+            <PathIcon x:Name="CustomModeStatusIcon"
+                      Data="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+                      Foreground="#E53935"
+                      Width="18"
+                      Height="18"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Center"/>
+        </Border>
+    </Grid>
+
+    <Grid x:Name="LanguageScreen" IsVisible="False" Background="#E0120E12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Border Grid.Row="0" Background="#E88CA6" Padding="5" PointerPressed="Header_PointerPressed">
+                <Grid>
+                    <Image Source="avares://YSLauncher/Assets/logo.png" 
+                           Height="60" 
+                           Margin="0,15,0,15" 
+                           HorizontalAlignment="Center" 
+                           VerticalAlignment="Center" 
+                           RenderOptions.BitmapInterpolationMode="HighQuality"/>
+
+                    <Button x:Name="LanguageBackButton"
+                            Classes="HeaderBtn"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Margin="6,6,0,0"
+                            Click="LanguageBackButton_Click"
+                            IsVisible="False">
+                        <PathIcon Data="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" Width="20" Height="20" Foreground="White"/>
+                    </Button>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,6,6,0" Spacing="2">
+                        <Button Classes="HeaderBtn"
+                                VerticalAlignment="Top"
+                                Click="MinimizeButton_Click">
+                            <PathIcon Data="M19 13H5v-2h14v2z" Width="17" Height="17" Foreground="White"/>
+                        </Button>
+                        <Button Classes="HeaderCloseBtn"
+                                VerticalAlignment="Top"
+                                Click="CloseButton_Click">
+                            <PathIcon Data="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" Width="17" Height="17" Foreground="White"/>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <Panel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <!-- Prompt Inicial de Confirmação de Idioma Detectado -->
+                <Border x:Name="LanguagePromptCard"
+                        IsVisible="False"
+                        Width="470"
+                        Background="#1E1620"
+                        BorderBrush="#FF3B7C"
+                        BorderThickness="1.5"
+                        CornerRadius="16"
+                        Padding="32,28"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        BoxShadow="0 10 40 0 #B0000000">
+                    <StackPanel Spacing="22" HorizontalAlignment="Center">
+                        <!-- Flag Preview -->
+                        <Border Width="110" Height="74" CornerRadius="10" ClipToBounds="True" BoxShadow="0 6 20 0 #80000000" HorizontalAlignment="Center">
+                            <Panel Width="110" Height="74">
+                                <Image x:Name="LanguagePromptFlagImg" Stretch="UniformToFill" Width="110" Height="74" RenderOptions.BitmapInterpolationMode="HighQuality"/>
+                                <Border x:Name="LanguagePromptFlagFallback" Background="#FF3B7C" IsVisible="True">
+                                    <TextBlock x:Name="LanguagePromptFlagFallbackText" Text="PT" Foreground="White" FontSize="30" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </Panel>
+                        </Border>
+
+                        <!-- Question Text -->
+                        <TextBlock x:Name="LanguagePromptQuestionText"
+                                   Text="Seu idioma é Português?"
+                                   FontSize="22"
+                                   FontWeight="Bold"
+                                   Foreground="White"
+                                   LetterSpacing="2"
+                                   TextWrapping="Wrap"
+                                   TextAlignment="Center"
+                                   HorizontalAlignment="Center"
+                                   Margin="0,4,0,8"/>
+
+                        <!-- Buttons -->
+                        <StackPanel Spacing="12" HorizontalAlignment="Center" Width="360">
+                            <Button x:Name="LanguagePromptYesButton"
+                                    Classes="PromptYesBtn"
+                                    Click="LanguagePromptYesButton_Click"
+                                    Height="48"
+                                    HorizontalAlignment="Stretch"
+                                    HorizontalContentAlignment="Center"
+                                    VerticalContentAlignment="Center"
+                                    Cursor="Hand">
+                                <TextBlock x:Name="LanguagePromptYesText" 
+                                           Text="SIM" 
+                                           FontSize="16"
+                                           FontWeight="Bold"
+                                           LetterSpacing="2.5"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"/>
+                            </Button>
+
+                            <Button x:Name="LanguagePromptNoButton"
+                                    Classes="PromptNoBtn"
+                                    Click="LanguagePromptNoButton_Click"
+                                    Height="44"
+                                    HorizontalAlignment="Stretch"
+                                    HorizontalContentAlignment="Center"
+                                    VerticalContentAlignment="Center"
+                                    Cursor="Hand">
+                                <TextBlock x:Name="LanguagePromptNoText" 
+                                           Text="NÃO, SELECIONAR OUTRO" 
+                                           FontSize="14"
+                                           FontWeight="SemiBold"
+                                           LetterSpacing="1.5"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"/>
+                            </Button>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+
+                <!-- Grade completa com todas as bandeiras -->
+                <Panel x:Name="LanguageGridPanel" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <UniformGrid Columns="3" Rows="4" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Button Classes="FlagTile" Tag="en" Click="LangCard_Click" Width="98" Height="66" Margin="7,9">
+                        <Panel Width="98" Height="66">
+                            <Border CornerRadius="8" ClipToBounds="True" BoxShadow="0 4 14 0 #66000000">
+                                <Image x:Name="FlagImg_en" Stretch="UniformToFill" Width="98" Height="66" RenderOptions.BitmapInterpolationMode="HighQuality"/>
+                            </Border>
+                            <Border x:Name="FlagFallback_en" Width="98" Height="66" Background="#FF3B7C" CornerRadius="8" IsVisible="True">
+                                <TextBlock Text="EN" Foreground="White" FontSize="26" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </Panel>
+                    </Button>
+
+                    <Button Classes="FlagTile" Tag="es" Click="LangCard_Click" Width="98" Height="66" Margin="7,9">
+                        <Panel Width="98" Height="66">
+                            <Border CornerRadius="8" ClipToBounds="True" BoxShadow="0 4 14 0 #66000000">
+                                <Image x:Name="FlagImg_es" Stretch="UniformToFill" Width="98" Height="66" RenderOptions.BitmapInterpolationMode="HighQuality"/>
+                            </Border>
+                            <Border x:Name="FlagFallback_es" Width="98" Height="66" Background="#FF3B7C" CornerRadius="8" IsVisible="True">
+                                <TextBlock Text="ES" Foreground="White" FontSize="26" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </Panel>
+                    </Button>
+
+                    <Button Classes="FlagTile" Tag="pt" Click="LangCard_Click" Width="98" Height="66" Margin="7,9">
+                        <Panel Width="98" Height="66">
+                            <Border CornerRadius="8" ClipToBounds="True" BoxShadow="0 4 14 0 #66000000">
+                                <Image x:Name="FlagImg_pt" Stretch="UniformToFill" Width="98" Height="66" RenderOptions.BitmapInterpolationMode="HighQuality"/>
+                            </Border>
+                            <Border x:Name="FlagFallback_pt" Width="98" Height="66" Background="#FF3B7C" CornerRadius="8" IsVisible="True">
+                                <TextBlock Text="PT" Foreground="White" FontSize="26" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </Panel>
+                    </Button>
+
+                    <Button Classes="FlagTile" Tag="tr" Click="LangCard_Click" Width="98" Height="66" Margin="7,9">
+                        <Panel Width="98" Height="66">
+                            <Border CornerRadius="8" ClipToBounds="True" BoxShadow="0 4 14 0 #66000000">
+                                <Image x:Name="FlagImg_tr" Stretch="UniformToFill" Width="98" Height="66" RenderOptions.BitmapInterpolationMode="HighQuality"/>
+                            </Border>
+                            <Border x:Name="FlagFallback_tr" Width="98" Height="66" Background="#FF3B7C" CornerRadius="8" IsVisible="True">
+                                <TextBlock Text="TR" Foreground="White" FontSize="26" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </Panel>
+                    </Button>
+
+                    <Button Classes="FlagTile" Tag="ru" Click="LangCard_Click" Width="98" Height="66" Margin="7,9">
+                        <Panel Width="98" Height="66">
+                            <Border CornerRadius="8" ClipToBounds="True" BoxShadow="0 4 14 0 #66000000">
+                                <Image x:Name="FlagImg_ru" Stretch="UniformToFill" Width="98" Height="66" RenderOptions.BitmapInterpolationMode="HighQuality"/>
+                            </Border>
+                            <Border x:Name="FlagFallback_ru" Width="98" Height="66" Background="#FF3B7C" CornerRadius="8" IsVisible="True">
+                                <TextBlock Text="RU" Foreground="White" FontSize="26" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </Panel>
+                    </Button>
+
+                    <Button Classes="FlagTile" Tag="fr" Click="LangCard_Click" Width="98" Height="66" Margin="7,9">
+                        <Panel Width="98" Height="66">
+                            <Border CornerRadius="8" ClipToBounds="True" BoxShadow="0 4 14 0 #66000000">
+                                <Image x:Name="FlagImg_fr" Stretch="UniformToFill" Width="98" Height="66" RenderOptions.BitmapInterpolationMode="HighQuality"/>
+                            </Border>
+                            <Border x:Name="FlagFallback_fr" Width="98" Height="66" Background="#FF3B7C" CornerRadius="8" IsVisible="True">
+                                <TextBlock Text="FR" Foreground="White" FontSize="26" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </Panel>
+                    </Button>
+
+                    <Button Classes="FlagTile" Tag="th" Click="LangCard_Click" Width="98" Height="66" Margin="7,9">
+                        <Panel Width="98" Height="66">
+                            <Border CornerRadius="8" ClipToBounds="True" BoxShadow="0 4 14 0 #66000000">
+                                <Image x:Name="FlagImg_th" Stretch="UniformToFill" Width="98" Height="66" RenderOptions.BitmapInterpolationMode="HighQuality"/>
+                            </Border>
+                            <Border x:Name="FlagFallback_th" Width="98" Height="66" Background="#FF3B7C" CornerRadius="8" IsVisible="True">
+                                <TextBlock Text="TH" Foreground="White" FontSize="26" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </Panel>
+                    </Button>
+
+                    <Button Classes="FlagTile" Tag="de" Click="LangCard_Click" Width="98" Height="66" Margin="7,9">
+                        <Panel Width="98" Height="66">
+                            <Border CornerRadius="8" ClipToBounds="True" BoxShadow="0 4 14 0 #66000000">
+                                <Image x:Name="FlagImg_de" Stretch="UniformToFill" Width="98" Height="66" RenderOptions.BitmapInterpolationMode="HighQuality"/>
+                            </Border>
+                            <Border x:Name="FlagFallback_de" Width="98" Height="66" Background="#FF3B7C" CornerRadius="8" IsVisible="True">
+                                <TextBlock Text="DE" Foreground="White" FontSize="26" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </Panel>
+                    </Button>
+
+                    <Button Classes="FlagTile" Tag="it" Click="LangCard_Click" Width="98" Height="66" Margin="7,9">
+                        <Panel Width="98" Height="66">
+                            <Border CornerRadius="8" ClipToBounds="True" BoxShadow="0 4 14 0 #66000000">
+                                <Image x:Name="FlagImg_it" Stretch="UniformToFill" Width="98" Height="66" RenderOptions.BitmapInterpolationMode="HighQuality"/>
+                            </Border>
+                            <Border x:Name="FlagFallback_it" Width="98" Height="66" Background="#FF3B7C" CornerRadius="8" IsVisible="True">
+                                <TextBlock Text="IT" Foreground="White" FontSize="26" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </Panel>
+                    </Button>
+
+                    <Button Classes="FlagTile" Tag="id" Click="LangCard_Click" Width="98" Height="66" Margin="7,9">
+                        <Panel Width="98" Height="66">
+                            <Border CornerRadius="8" ClipToBounds="True" BoxShadow="0 4 14 0 #66000000">
+                                <Image x:Name="FlagImg_id" Stretch="UniformToFill" Width="98" Height="66" RenderOptions.BitmapInterpolationMode="HighQuality"/>
+                            </Border>
+                            <Border x:Name="FlagFallback_id" Width="98" Height="66" Background="#FF3B7C" CornerRadius="8" IsVisible="True">
+                                <TextBlock Text="ID" Foreground="White" FontSize="26" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </Panel>
+                    </Button>
+
+                    <Button Classes="FlagTile" Tag="pl" Click="LangCard_Click" Width="98" Height="66" Margin="7,9">
+                        <Panel Width="98" Height="66">
+                            <Border CornerRadius="8" ClipToBounds="True" BoxShadow="0 4 14 0 #66000000">
+                                <Image x:Name="FlagImg_pl" Stretch="UniformToFill" Width="98" Height="66" RenderOptions.BitmapInterpolationMode="HighQuality"/>
+                            </Border>
+                            <Border x:Name="FlagFallback_pl" Width="98" Height="66" Background="#FF3B7C" CornerRadius="8" IsVisible="True">
+                                <TextBlock Text="PL" Foreground="White" FontSize="26" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </Panel>
+                    </Button>
+
+                    <Button Classes="FlagTile" Tag="ja" Click="LangCard_Click" Width="98" Height="66" Margin="7,9">
+                        <Panel Width="98" Height="66">
+                            <Border CornerRadius="8" ClipToBounds="True" BoxShadow="0 4 14 0 #66000000">
+                                <Image x:Name="FlagImg_ja" Stretch="UniformToFill" Width="98" Height="66" RenderOptions.BitmapInterpolationMode="HighQuality"/>
+                            </Border>
+                            <Border x:Name="FlagFallback_ja" Width="98" Height="66" Background="#FF3B7C" CornerRadius="8" IsVisible="True">
+                                <TextBlock Text="JA" Foreground="White" FontSize="26" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </Panel>
+                    </Button>
+                </UniformGrid>
+                </Panel>
+            </Panel>
+        </Grid>
+
+        <Grid x:Name="HeartNoticeOverlay" Grid.Row="0" Grid.RowSpan="3" ZIndex="160" Background="#E60D0A0E" IsVisible="False">
+            <Border Width="470" Background="#1C161D" BorderBrush="#FF3B7C" BorderThickness="1.5" CornerRadius="16" Padding="32,28" HorizontalAlignment="Center" VerticalAlignment="Center" BoxShadow="0 10 40 0 #B0000000">
+                <StackPanel HorizontalAlignment="Center" Spacing="18">
+                    <Image x:Name="HeartNoticeLogo"
+                           Source="avares://YSLauncher/Assets/logo.png"
+                           Height="68"
+                           HorizontalAlignment="Center"
+                           RenderOptions.BitmapInterpolationMode="HighQuality"
+                           RenderTransformOrigin="50%,50%"/>
+
+                    <TextBlock x:Name="HeartNoticeText"
+                               Text="Quando o coração estiver pulsando, há uma nova atualização disponível."
+                               Foreground="White"
+                               FontSize="18"
+                               FontWeight="Normal"
+                               TextAlignment="Center"
+                               TextWrapping="Wrap"
+                               HorizontalAlignment="Center"
+                               LineHeight="26"
+                               Margin="8,0,8,4"/>
+
+                    <Button x:Name="HeartNoticeOkButton"
+                            Classes="GreenOkBtn"
+                            Content="OK"
+                            Width="130"
+                            Height="38"
+                            HorizontalAlignment="Center"
+                            Click="HeartNoticeOkButton_Click"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <Grid x:Name="TutorialOverlay" Grid.Row="0" Grid.RowSpan="3" ZIndex="170" IsVisible="False">
+            <Path x:Name="TutorialMaskPath" Fill="#B30D0A0E"/>
+
+            <Border x:Name="TutorialHighlightBorder"
+                    BorderBrush="#FF3B7C"
+                    BorderThickness="2"
+                    CornerRadius="8"
+                    BoxShadow="0 0 18 3 #99FF3B7C"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    IsHitTestVisible="False"/>
+
+            <Border x:Name="TutorialCard"
+                    Width="350"
+                    Background="#FDFBFA"
+                    BorderBrush="#FF3B7C"
+                    BorderThickness="1.5"
+                    CornerRadius="12"
+                    Padding="20,18"
+                    BoxShadow="0 8 30 0 #B0000000"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    Margin="0,110,0,0">
+                <StackPanel Spacing="14">
+                    <Grid ColumnDefinitions="Auto, *, Auto">
+                        <Border Grid.Column="0"
+                                Background="#FFE2EB"
+                                CornerRadius="10"
+                                Padding="10,4">
+                            <TextBlock x:Name="TutorialStepBadge"
+                                       Text="1 de 5"
+                                       Foreground="#FF3B7C"
+                                       FontWeight="Bold"
+                                       FontSize="16"/>
+                        </Border>
+                        
+                        <Button x:Name="TutorialCloseButton"
+                                Grid.Column="2"
+                                Classes="HeaderBtn"
+                                Width="28" Height="28"
+                                Padding="0"
+                                Background="Transparent"
+                                Click="TutorialCloseButton_Click">
+                            <PathIcon Data="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+                                      Width="13" Height="13"
+                                      Foreground="#8C8886"/>
+                        </Button>
+                    </Grid>
+
+                    <TextBlock x:Name="TutorialTitleText"
+                               Text="Versões"
+                               Foreground="#FF3B7C"
+                               FontSize="26"
+                               FontWeight="Bold"
+                               HorizontalAlignment="Center"
+                               TextAlignment="Center"/>
+
+                    <StackPanel x:Name="TutorialSubtitlePanel"
+                                Orientation="Horizontal"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Spacing="4"
+                                Margin="0,-6,0,0"
+                                IsVisible="False">
+                        <TextBlock Text="("
+                                   Foreground="#FF3B7C"
+                                   FontSize="22"
+                                   FontWeight="Bold"
+                                   VerticalAlignment="Center"/>
+                        <PathIcon x:Name="TutorialSubtitleHeart"
+                                  Width="18" Height="18"
+                                  Data="M16.5 3c-1.74 0-3.41.81-4.5 2.09C10.91 3.81 9.24 3 7.5 3 4.42 3 2 5.42 2 8.5c0 3.78 3.4 6.86 8.55 11.54L12 21.35l1.45-1.32C18.6 15.36 22 12.28 22 8.5 22 5.42 19.58 3 16.5 3zm-4.4 15.55l-.1.1-.1-.1C7.14 14.24 4 11.39 4 8.5 4 6.5 5.5 5 7.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5c2 0 3.5 1.5 3.5 3.5 0 2.89-3.14 5.74-7.9 10.05z"
+                                  Foreground="#FF3B7C"
+                                  VerticalAlignment="Center"/>
+                        <TextBlock Text=")"
+                                   Foreground="#FF3B7C"
+                                   FontSize="22"
+                                   FontWeight="Bold"
+                                   VerticalAlignment="Center"/>
+                    </StackPanel>
+
+                    <TextBlock x:Name="TutorialDescText"
+                               Text="Você pode baixar qualquer versão publicada no Internet Archive desde 2015! A lixeira desinstala a versão selecionada para liberar espaço no disco."
+                               Foreground="#4A4240"
+                               FontSize="21"
+                               TextWrapping="Wrap"
+                               LineHeight="29"/>
+
+                    <Grid ColumnDefinitions="Auto, *, Auto, 14, Auto" Margin="0,16,0,0">
+                        <Button x:Name="TutorialSkipButton"
+                                Grid.Column="0"
+                                Content="Pular"
+                                Background="Transparent"
+                                Foreground="#8C8886"
+                                FontSize="18"
+                                Padding="4,4"
+                                Cursor="Hand"
+                                Click="TutorialCloseButton_Click"/>
+
+                        <Button x:Name="TutorialPrevButton"
+                                Grid.Column="2"
+                                Background="#E4DCD8"
+                                Foreground="#504845"
+                                FontSize="17"
+                                Padding="14,8"
+                                CornerRadius="6"
+                                Cursor="Hand"
+                                Click="TutorialPrevButton_Click">
+                            <TextBlock x:Name="TutorialPrevText"
+                                       Text="Voltar"
+                                       LetterSpacing="1"/>
+                        </Button>
+
+                        <Button x:Name="TutorialNextButton"
+                                Grid.Column="4"
+                                Background="#FF3B7C"
+                                Foreground="White"
+                                FontWeight="Bold"
+                                FontSize="17"
+                                MinWidth="110"
+                                HorizontalContentAlignment="Center"
+                                Padding="18,8"
+                                CornerRadius="6"
+                                Cursor="Hand"
+                                Click="TutorialNextButton_Click">
+                            <TextBlock x:Name="TutorialNextText"
+                                       Text="Avançar >"
+                                       LetterSpacing="1"/>
+                        </Button>
+                    </Grid>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <!-- Permissão Necessária (macOS) -->
+        <Grid x:Name="PermissionDeniedModal" ZIndex="180" Background="#99000000" IsVisible="False">
+            <Border Background="#F9F6F5" CornerRadius="12" Padding="25" Margin="20" VerticalAlignment="Center" HorizontalAlignment="Center" MaxWidth="350" BoxShadow="0 10 40 0 #B0000000">
+                <StackPanel Spacing="18">
+                    <TextBlock x:Name="PermissionDeniedModalTitle" Text="Permissão Necessária" FontSize="26" FontWeight="Bold" HorizontalAlignment="Center" Foreground="#FF3B7C" LetterSpacing="1"/>
+                    <TextBlock x:Name="PermissionDeniedModalDesc" Text="Permissão negada. Por favor, clique no botão Procurar (...) e aceite a permissão de acesso à pasta para continuar." TextWrapping="Wrap" FontSize="20" Foreground="#555555" TextAlignment="Center"/>
+                    
+                    <Button x:Name="PermissionDeniedModalSettingsButton" Classes="ModalPrimaryBtn" Content="Abrir Ajustes do Mac" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" FontSize="20" Height="45" Click="PermissionDeniedModalSettingsButton_Click"/>
+                    <Button x:Name="PermissionDeniedModalCloseButton" Classes="ModalCancelBtn" Content="Entendido" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" FontSize="19" Height="35" Click="PermissionDeniedModalCloseButton_Click"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <!-- Atalho na Área de Trabalho -->
+        <Grid x:Name="ShortcutModal" ZIndex="180" Background="#99000000" IsVisible="False">
+            <Border Background="#F9F6F5" CornerRadius="12" Padding="25" Margin="20" VerticalAlignment="Center" HorizontalAlignment="Center" MaxWidth="350" BoxShadow="0 10 40 0 #B0000000">
+                <StackPanel Spacing="18">
+                    <TextBlock x:Name="ShortcutModalTitle" Text="Jogo Instalado!" FontSize="26" HorizontalAlignment="Center" Foreground="#FF3B7C" FontWeight="Bold" LetterSpacing="1"/>
+                    <TextBlock x:Name="ShortcutModalDesc" Text="Deseja adicionar o atalho do jogo na área de trabalho?" TextWrapping="Wrap" FontSize="21" Foreground="#555555" TextAlignment="Center"/>
+                    
+                    <Button x:Name="ShortcutModalYesButton" Classes="ModalPrimaryBtn" Content="Sim, criar atalho" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" FontSize="21" Height="45" Click="ShortcutModalYesButton_Click"/>
+                    <Button x:Name="ShortcutModalNoButton" Classes="ModalCancelBtn" Content="Não, obrigado" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" FontSize="19" Height="35" Click="ShortcutModalNoButton_Click"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <!-- Salvar Custom Mode -->
+        <Grid x:Name="DeleteBackupModal" ZIndex="180" Background="#99000000" IsVisible="False">
+            <Border Background="#F9F6F5" CornerRadius="12" Padding="25" Margin="20" VerticalAlignment="Center" HorizontalAlignment="Center" MaxWidth="350" BoxShadow="0 10 40 0 #B0000000">
+                <StackPanel Spacing="18">
+                    <TextBlock x:Name="DeleteBackupModalTitle" Text="Salvar Custom Mode?" FontSize="26" HorizontalAlignment="Center" Foreground="#FF3B7C" FontWeight="Bold" LetterSpacing="1"/>
+                    <TextBlock x:Name="DeleteBackupModalDesc" Text="Deseja salvar seu Custom Mode antes de continuar?" TextWrapping="Wrap" FontSize="20" Foreground="#555555" TextAlignment="Center"/>
+                    
+                    <Button x:Name="DeleteBackupYesButton" Classes="ModalPrimaryBtn" Content="Sim, salvar" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" FontSize="21" Height="45" Click="DeleteBackupYesButton_Click"/>
+                    <Button x:Name="DeleteBackupNoButton" Classes="ModalSecondaryBtn" Content="Não salvar" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" FontSize="21" Height="45" Click="DeleteBackupNoButton_Click"/>
+                    <Button x:Name="DeleteBackupCancelButton" Classes="ModalCancelBtn" Content="Cancelar" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" FontSize="19" Height="35" Click="DeleteBackupCancelButton_Click"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <!-- Desinstalar Versão -->
+        <Grid x:Name="DeleteModal" ZIndex="180" Background="#99000000" IsVisible="False">
+            <Border Background="#F9F6F5" CornerRadius="12" Padding="25" Margin="20" VerticalAlignment="Center" HorizontalAlignment="Center" MaxWidth="350" BoxShadow="0 10 40 0 #B0000000">
+                <StackPanel Spacing="16">
+                    <TextBlock x:Name="DeleteModalTitle" Text="Desinstalar Versão" FontSize="26" HorizontalAlignment="Center" Foreground="#E53935" FontWeight="Bold" LetterSpacing="1"/>
+                    <StackPanel Spacing="4" HorizontalAlignment="Center">
+                        <TextBlock x:Name="DeleteModalDesc" Text="Deseja apagar esta versão?" TextWrapping="Wrap" FontSize="21" Foreground="#555555" TextAlignment="Center"/>
+                        <TextBlock x:Name="DeleteModalSafeNotice" Text="(Seu Custom Mode e Posemod estão salvos.)" TextWrapping="Wrap" FontSize="16" Foreground="#777777" HorizontalAlignment="Center" TextAlignment="Center"/>
+                    </StackPanel>
+                    
+                    <Button x:Name="DeleteModalYesButton" Classes="ModalDangerBtn" Content="APAGAR" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" FontSize="21" Height="45" Click="DeleteModalYesButton_Click"/>
+                    <Button x:Name="DeleteModalNoButton" Classes="ModalCancelBtn" Content="Cancelar" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" FontSize="19" Height="35" Click="DeleteModalNoButton_Click"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <!-- Notificações de Atualização -->
+        <Grid x:Name="NotificationModal" ZIndex="180" Background="#99000000" IsVisible="False">
+            <Border Background="#F9F6F5" CornerRadius="12" Padding="25" Margin="20" VerticalAlignment="Center" HorizontalAlignment="Center" MaxWidth="350" BoxShadow="0 10 40 0 #B0000000">
+                <StackPanel Spacing="18">
+                    <TextBlock x:Name="NotificationModalTitle" Text="Notificações de Atualização" FontSize="26" HorizontalAlignment="Center" Foreground="#FF3B7C" FontWeight="Bold" LetterSpacing="1"/>
+                    <TextBlock x:Name="NotificationModalDesc" Text="Deseja ativar as notificações para saber quando houver uma nova atualização?" TextWrapping="Wrap" FontSize="20" Foreground="#555555" TextAlignment="Center"/>
+                    
+                    <Button x:Name="NotificationModalYesButton" Classes="ModalPrimaryBtn" Content="Sim, ativar" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" FontSize="21" Height="45" Click="NotificationModalYesButton_Click"/>
+                    <Button x:Name="NotificationModalNoButton" Classes="ModalCancelBtn" Content="Não, obrigado" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" FontSize="19" Height="35" Click="NotificationModalNoButton_Click"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <!-- Importar Custom Mode -->
+        <Grid x:Name="ImportCustomModeModal" ZIndex="180" Background="#99000000" IsVisible="False">
+            <Border Background="#F9F6F5" CornerRadius="12" Padding="25" Margin="20" VerticalAlignment="Center" HorizontalAlignment="Center" MaxWidth="350" BoxShadow="0 10 40 0 #B0000000">
+                <StackPanel Spacing="18">
+                    <TextBlock x:Name="ImportCustomModeTitle" Text="Importar Custom Mode" FontSize="26" HorizontalAlignment="Center" Foreground="#FF3B7C" FontWeight="Bold" LetterSpacing="1"/>
+                    <TextBlock x:Name="ImportCustomModeDesc" Text="Você possui um Custom Mode salvo no computador. Deseja importá-lo para esta versão?" TextWrapping="Wrap" FontSize="20" Foreground="#555555" TextAlignment="Center"/>
+                    
+                    <Button x:Name="ImportCustomModeYesButton" Classes="ModalPrimaryBtn" Content="Sim, importar" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" FontSize="21" Height="45" Click="ImportCustomModeYesButton_Click"/>
+                    <Button x:Name="ImportCustomModeNoButton" Classes="ModalSecondaryBtn" Content="Não, começar do zero" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" FontSize="21" Height="45" Click="ImportCustomModeNoButton_Click"/>
+                    <Button x:Name="ImportCustomModeCancelButton" Classes="ModalCancelBtn" Content="Cancelar" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" FontSize="19" Height="35" Click="ImportCustomModeCancelButton_Click"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <!-- Confirmar Atualização -->
+        <Grid x:Name="UpdateConfirmModal" ZIndex="180" Background="#99000000" IsVisible="False">
+            <Border Background="#F9F6F5" CornerRadius="12" Padding="25" Margin="20" VerticalAlignment="Center" HorizontalAlignment="Center" MaxWidth="350" BoxShadow="0 10 40 0 #B0000000">
+                <StackPanel Spacing="16">
+                    <TextBlock x:Name="UpdateConfirmTitle" Text="Atualizar Jogo" FontSize="26" HorizontalAlignment="Center" Foreground="#FF3B7C" FontWeight="Bold" LetterSpacing="1"/>
+                    <TextBlock x:Name="UpdateConfirmDesc" Text="Isto apagará a versão anterior para liberar espaço no computador." TextWrapping="Wrap" FontSize="20" Foreground="#555555" TextAlignment="Center"/>
+                    <TextBlock x:Name="UpdateConfirmCustomModeSafe" Text="Seu Custom Mode está salvo!" FontWeight="SemiBold" FontSize="18" Foreground="#2ECC71" HorizontalAlignment="Center" TextAlignment="Center"/>
+                    
+                    <Button x:Name="UpdateConfirmYesButton" Classes="ModalPrimaryBtn" Content="Sim, atualizar" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" FontSize="21" Height="45" Click="UpdateConfirmYesButton_Click"/>
+                    <Button x:Name="UpdateConfirmNoButton" Classes="ModalCancelBtn" Content="Cancelar" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" FontSize="19" Height="35" Click="UpdateConfirmNoButton_Click"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <!-- Proton-GE (Linux) -->
+        <Grid x:Name="ProtonModal" ZIndex="180" Background="#99000000" IsVisible="False">
+            <Border Background="#F9F6F5" CornerRadius="12" Padding="25" Margin="20" VerticalAlignment="Center" HorizontalAlignment="Center" MaxWidth="350" BoxShadow="0 10 40 0 #B0000000">
+                <StackPanel Spacing="18">
+                    <TextBlock x:Name="ProtonModalTitle" Text="Instalação do Proton-GE" FontWeight="Bold" FontSize="26" HorizontalAlignment="Center" Foreground="#FF3B7C" LetterSpacing="1"/>
+                    <TextBlock x:Name="ProtonModalDesc1" Text="Deseja instalar na pasta global da Steam para usar em outros jogos também?" TextWrapping="Wrap" FontSize="21" Foreground="#555555" TextAlignment="Center"/>
+                    <TextBlock x:Name="ProtonModalDesc2" Text="(Se não souber o que é isso, apenas clique em Isolado)" TextWrapping="Wrap" FontSize="19" Foreground="#888888" TextAlignment="Center"/>
+                    
+                    <Button x:Name="ProtonIsolatedButton" Classes="ModalPrimaryBtn" Content="Instalar Isolado (Recomendado)" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" FontSize="21" Height="45" Click="ProtonIsolatedButton_Click"/>
+                    <Button x:Name="ProtonSteamButton" Classes="ModalSecondaryBtn" Content="Instalar na Steam (compatibilitytools.d)" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" FontSize="21" Height="45" Click="ProtonSteamButton_Click"/>
+                    <Button x:Name="ProtonCancelButton" Classes="ModalCancelBtn" Content="Cancelar" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" FontSize="19" Height="35" Click="ProtonCancelButton_Click"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <!-- Onboarding: Versões Anteriores -->
+        <Grid x:Name="OrganizeOnboardingModal" ZIndex="180" Background="#99000000" IsVisible="False">
+            <Border Background="#F9F6F5" CornerRadius="12" Padding="25" Margin="20" VerticalAlignment="Center" HorizontalAlignment="Center" MaxWidth="350" BoxShadow="0 10 40 0 #B0000000">
+                <StackPanel Spacing="18">
+                    <TextBlock x:Name="OrganizeOnboardingTitle" Text="Versões Anteriores" FontSize="26" FontWeight="Bold" HorizontalAlignment="Center" Foreground="#FF3B7C" LetterSpacing="1"/>
+                    <TextBlock x:Name="OrganizeOnboardingDesc" Text="Caso já tenha versões do Yandere Simulator baixadas, selecione a pasta para o launcher organizá-las para você." TextWrapping="Wrap" FontSize="21" Foreground="#555555" TextAlignment="Center"/>
+                    
+                    <Button x:Name="OrganizeOnboardingYesButton" Classes="ModalPrimaryBtn" Content="Sim, apontar pasta" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" FontSize="21" Height="45" Click="OrganizeOnboardingYesButton_Click"/>
+                    <Button x:Name="OrganizeOnboardingNoButton" Classes="ModalCancelBtn" Content="Não, começar do zero" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" FontSize="19" Height="35" Click="OrganizeOnboardingNoButton_Click"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <!-- Organizar Pastas do Jogo -->
+        <Grid x:Name="OrganizePromptModal" ZIndex="180" Background="#99000000" IsVisible="False">
+            <Border Background="#F9F6F5" CornerRadius="12" Padding="25" Margin="20" VerticalAlignment="Center" HorizontalAlignment="Center" MaxWidth="350" BoxShadow="0 10 40 0 #B0000000">
+                <StackPanel Spacing="18">
+                    <TextBlock x:Name="OrganizePromptTitle" Text="Organizar Pastas do Jogo" FontSize="26" FontWeight="Bold" HorizontalAlignment="Center" Foreground="#FF3B7C" LetterSpacing="1"/>
+                    <TextBlock x:Name="OrganizePromptDesc" Text="O launcher irá escanear suas versões e organizá-las na pasta padrão (vers/), permitindo controle total e troca rápida entre versões.&#x0a;&#x0a;Feche o jogo antes de continuar!" TextWrapping="Wrap" FontSize="20" Foreground="#555555" TextAlignment="Center"/>
+                    
+                    <Button x:Name="OrganizePromptSelectButton" Classes="ModalPrimaryBtn" Content="Selecionar Pasta e Organizar" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" FontSize="21" Height="45" Click="OrganizePromptSelectButton_Click"/>
+                    <Button x:Name="OrganizePromptCancelButton" Classes="ModalCancelBtn" Content="Cancelar" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" FontSize="19" Height="35" Click="OrganizePromptCancelButton_Click"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <!-- Pré-visualização de Versões Encontradas -->
+        <Grid x:Name="OrganizePreviewModal" ZIndex="180" Background="#99000000" IsVisible="False">
+            <Border Background="#F9F6F5" CornerRadius="12" Padding="25" Margin="20" VerticalAlignment="Center" HorizontalAlignment="Center" MaxWidth="350" BoxShadow="0 10 40 0 #B0000000">
+                <StackPanel Spacing="14">
+                    <TextBlock x:Name="OrganizePreviewTitle" Text="Versões Encontradas" FontSize="26" FontWeight="Bold" HorizontalAlignment="Center" Foreground="#FF3B7C" LetterSpacing="1"/>
+                    <TextBlock x:Name="OrganizePreviewDesc" Text="As seguintes versões foram encontradas e serão movidas para a estrutura 'vers/':" TextWrapping="Wrap" FontSize="19" Foreground="#555555" TextAlignment="Center"/>
+                    
+                    <Border Background="#EDE7E4" CornerRadius="6" Padding="10" MaxHeight="160">
+                        <ScrollViewer VerticalScrollBarVisibility="Auto">
+                            <StackPanel x:Name="OrganizePreviewList" Spacing="6"/>
+                        </ScrollViewer>
+                    </Border>
+                    
+                    <Button x:Name="OrganizeConfirmButton" Classes="ModalPrimaryBtn" Content="Mover e Organizar Agora" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" FontSize="21" Height="45" Click="OrganizeConfirmButton_Click"/>
+                    <Button x:Name="OrganizeCancelButton" Classes="ModalCancelBtn" Content="Cancelar" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" FontSize="19" Height="35" Click="OrganizeCancelButton_Click"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <Grid x:Name="LoadingOverlay" Grid.Row="0" Grid.RowSpan="3" ZIndex="200" Background="#CC141014" IsVisible="True">
+            <Panel Width="140" Height="140" HorizontalAlignment="Center" VerticalAlignment="Center" ClipToBounds="False">
+                <Path x:Name="LoadingHeartIcon" 
+                      Width="58" Height="58" 
+                      Data="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                      Fill="#FF3B7C"
+                      Stretch="Uniform"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Center"
+                      ClipToBounds="False"
+                      RenderTransformOrigin="50%,50%"/>
+            </Panel>
+        </Grid>
+    </Grid>
+</Window>

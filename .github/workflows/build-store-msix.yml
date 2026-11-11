@@ -1,0 +1,123 @@
+name: Build Microsoft Store MSIX
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Package Version (Quad format, ex: 1.0.0.0)'
+        required: true
+        default: '1.0.0.0'
+      identity_name:
+        description: 'Identity Name from Partner Center'
+        required: false
+        default: 'PedroNicolas.YSLauncher'
+      publisher_id:
+        description: 'Publisher ID from Partner Center'
+        required: false
+        default: 'CN=F6D1B662-F206-4CE1-A843-D6EC03943953'
+      publisher_display_name:
+        description: 'Publisher Display Name from Partner Center'
+        required: false
+        default: 'Pedro Nicolas'
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: read
+
+jobs:
+  build-msix:
+    name: Build MSIX Package
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Build and Package MSIX
+        shell: pwsh
+        run: |
+          $identity = "${{ github.event.inputs.identity_name }}"
+          if (-not $identity) { $identity = "PedroNicolas.YSLauncher" }
+
+          $pubId = "${{ github.event.inputs.publisher_id }}"
+          if (-not $pubId) { $pubId = "CN=F6D1B662-F206-4CE1-A843-D6EC03943953" }
+
+          $pubDisp = "${{ github.event.inputs.publisher_display_name }}"
+          if (-not $pubDisp) { $pubDisp = "Pedro Nicolas" }
+
+          $version = "${{ github.event.inputs.version }}"
+          if (-not $version) {
+              if ($env:GITHUB_REF -like "refs/tags/v*") {
+                  $cleanVer = $env:GITHUB_REF.Replace("refs/tags/v", "")
+                  $parts = $cleanVer.Split('.')
+                  while ($parts.Count -lt 4) { $parts += "0" }
+                  $version = ($parts[0..3] -join '.')
+              } else {
+                  $version = "1.0.0.0"
+              }
+          }
+
+          $distDir = "dist"
+          $stageDir = "$distDir/msix_stage"
+          $buildDir = "$distDir/msix_bin"
+          $outputMsix = "$distDir/YSLauncher-$version.msix"
+
+          New-Item -ItemType Directory -Force -Path $stageDir | Out-Null
+          New-Item -ItemType Directory -Force -Path $distDir | Out-Null
+
+          dotnet publish YSLauncher.csproj `
+            -c Release `
+            -r win-x64 `
+            --self-contained true `
+            --output $buildDir `
+            -p:PublishSingleFile=true `
+            -p:IncludeNativeLibrariesForSelfExtract=true `
+            -p:EnableCompressionInSingleFile=true `
+            -p:DebugType=None `
+            -p:DebugSymbols=false `
+            --nologo
+
+          Copy-Item "$buildDir/YSLauncher.exe" -Destination "$stageDir/YSLauncher.exe"
+          Copy-Item "Platforms/Windows/MSIX/Assets" -Destination "$stageDir/Assets" -Recurse
+
+          [xml]$manifest = Get-Content "Platforms/Windows/MSIX/Package.appxmanifest"
+          $manifest.Package.Identity.Name = $identity
+          $manifest.Package.Identity.Publisher = $pubId
+          $manifest.Package.Properties.PublisherDisplayName = $pubDisp
+          $manifest.Package.Identity.Version = $version
+          $manifest.Save("$stageDir/AppxManifest.xml")
+
+          $sdkRoots = @(
+              "${env:ProgramFiles(x86)}\Windows Kits\10\bin",
+              "${env:ProgramFiles}\Windows Kits\10\bin"
+          )
+          $makeAppx = $null
+          foreach ($root in $sdkRoots) {
+              if (Test-Path $root) {
+                  $found = Get-ChildItem -Path $root -Filter "makeappx.exe" -Recurse -ErrorAction SilentlyContinue |
+                           Where-Object { $_.FullName -like "*x64*" } |
+                           Select-Object -First 1
+                  if ($found) { $makeAppx = $found.FullName; break }
+              }
+          }
+
+          if (-not $makeAppx) {
+              Write-Error "MakeAppx.exe not found in Windows Kits."
+              exit 1
+          }
+
+          & $makeAppx pack /d "$stageDir" /p "$outputMsix" /nv /o
+
+      - name: Upload MSIX Package Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: YSLauncher-MSIX-Store
+          path: dist/*.msix
+          if-no-files-found: error
