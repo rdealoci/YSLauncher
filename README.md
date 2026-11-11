@@ -28,18 +28,19 @@ Built with C# and [Avalonia UI](https://avaloniaui.net/), targeting .NET 10.
 
 ## Download & Installation
 
-### Windows
-Download the standalone executable from the Releases page:
-- `YSLauncher.exe` (Single-file, no installer required).
-
-### Linux
-Download `YSLauncher-linux` or install via terminal:
+### Linux & macOS (Quick Install)
+Install or update automatically with a single command:
 ```bash
-curl -fsSL https://raw.githubusercontent.com/rdealoci/YSLauncher/main/scripts/linux/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/rdealoci/YSLauncher/main/scripts/install.sh | bash
 ```
+- **Linux**: Installs to `~/.local/share/YSLauncher`, links `yslauncher` to `~/.local/bin`, and adds a desktop menu entry.
+- **macOS**: Installs `YSLauncher.app` to `/Applications`, strips quarantine attributes, and signs the application.
 
-### macOS
-Download `YSLauncher.dmg` (Universal 2) and drag `YSLauncher.app` to your `Applications` folder.
+### Standalone Downloads
+Binaries are also available on the [Releases](https://github.com/rdealoci/YSLauncher/releases) page:
+- **Windows (x64)**: `YSLauncher.exe` (Portable single-file, no installer required).
+- **macOS (Universal 2)**: `YSLauncher.dmg` (Intel & Apple Silicon).
+- **Linux (x64)**: `YSLauncher-linux` / `YSLauncher-Linux.tar.gz`.
 
 ---
 
