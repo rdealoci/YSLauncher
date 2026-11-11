@@ -73,4 +73,4 @@ Or build specifically for your target platform:
 
 ## Disclaimer
 
-YSLauncher is an independent, open-source fan-made project. It is not affiliated with, endorsed by, or connected to YandereDev or the official development of Yandere Simulator.
+YSLauncher is an independent, open-source fan-made project. It is not affiliated with, endorsed by, or connected to the official development of Yandere Simulator.
