@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ApplicationManifest>Platforms/Windows/app.manifest</ApplicationManifest>
+    <ApplicationIcon>Assets/icon.ico</ApplicationIcon>
+    <UseAppHost Condition="'$(RuntimeIdentifier)' == ''">false</UseAppHost>
+    <Product>YSLauncher</Product>
+    <AssemblyTitle>YSLauncher</AssemblyTitle>
+    <Description>YSLauncher</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="12.1.2" />
+    <PackageReference Include="Avalonia.Desktop" Version="12.1.2" />
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="12.1.2" />
+    <PackageReference Include="Avalonia.Fonts.Inter" Version="12.1.2" />
+    <PackageReference Include="AvaloniaUI.DiagnosticsSupport" Version="2.2.3">
+      <IncludeAssets Condition="'$(Configuration)' != 'Debug'">None</IncludeAssets>
+      <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="SharpCompress" Version="0.50.4" />
+  </ItemGroup>
+  <ItemGroup>
+    <AvaloniaResource Include="Assets/**" Exclude="Assets/MacRuntime.tar.xz" />
+    <Content Include="Assets/logo.png" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets/icon.ico" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets/MacRuntime.tar.xz" CopyToOutputDirectory="PreserveNewest" Condition="$([System.String]::Copy('$(RuntimeIdentifier)').StartsWith('osx-'))" />
+    <None Include="Platforms/Mac/launch_detached" Link="launch_detached" CopyToOutputDirectory="PreserveNewest" Condition="Exists('Platforms/Mac/launch_detached') And $([System.String]::Copy('$(RuntimeIdentifier)').StartsWith('osx-'))" />
+    <None Include="Platforms/Mac/libnomicrophone.dylib" Link="libnomicrophone.dylib" CopyToOutputDirectory="PreserveNewest" Condition="Exists('Platforms/Mac/libnomicrophone.dylib') And $([System.String]::Copy('$(RuntimeIdentifier)').StartsWith('osx-'))" />
+  </ItemGroup>
+</Project>

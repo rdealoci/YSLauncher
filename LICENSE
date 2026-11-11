@@ -1,0 +1,26 @@
+# YSLauncher Source-Available License
+
+Copyright (c) 2026 Pedro Nicolas. All rights reserved.
+
+This software and associated documentation files (the "Software") are made available under a source-available, non-collaborative model for public inspection, audit, and personal use.
+
+## 1. Permitted Uses
+You are granted permission, free of charge, to:
+- View, inspect, and audit the source code of the Software.
+- Compile and run the Software locally on your own personal devices for personal, non-commercial use.
+- Fork the repository on GitHub exclusively under the platform rights and conditions defined in the GitHub Terms of Service.
+
+## 2. Restrictions
+Except as expressly authorized above or required by applicable law:
+- You may NOT redistribute, sublicense, sell, rent, or lease the Software or any portion thereof.
+- You may NOT distribute modified, derivative, or repackaged versions of the Software as official releases, nor use the name "YSLauncher", "YandereLauncher", or associated branding to mislead users into believing a derivative build is an official release.
+- Pull Requests and unsolicited code contributions will not be incorporated into the official repository.
+
+## 3. Third-Party Components
+This Software utilizes third-party open-source libraries and runtimes (including Avalonia UI, SharpCompress, Wine, and DXVK). Each third-party component remains subject to its own respective license terms. Nothing in this License alters or restricts your rights under those third-party licenses.
+
+## 4. GitHub Terms of Service Compliance
+In accordance with Section 5 of GitHub's Terms of Service, hosting this repository on GitHub grants other GitHub users the non-exclusive, worldwide right to view the code and fork this repository through GitHub's user interface. This License does not restrict or override those platform-level rights.
+
+## 5. Disclaimer of Warranty & Limitation of Liability
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHOR OR COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT, OR OTHERWISE, ARISING FROM, OUT OF, OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.

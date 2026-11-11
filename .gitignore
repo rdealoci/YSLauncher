@@ -1,0 +1,17 @@
+bin/
+obj/
+dist/
+site/
+.DS_Store
+._*
+*.user
+*.suo
+.vscode/
+.idea/
+*.dxvk-cache
+*.zip
+*.tar.gz
+*.dmg
+__pycache__/
+*.pyc
+run_log.txt
