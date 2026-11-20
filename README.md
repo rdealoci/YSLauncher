@@ -1,5 +1,7 @@
 # YSLauncher 
 
+[![Download from Microsoft Store](https://get.microsoft.com/images/en-us%20dark.svg)](https://get.microsoft.com/installer/download/9p2rx894ssjt?referrer=appbadge)
+
 A fast, lightweight cross-platform launcher for Yandere Simulator on Windows, Linux, and macOS.
 
 Built with C# and [Avalonia UI](https://avaloniaui.net/), targeting .NET 10.
